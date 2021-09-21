@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Poor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="emi-content">
+        <div class="home">
+            <a href="index.html">← Back to Homepage</a>
+        </div>
+        <div class="emi-calculator">
+            <div class="input-emi">
+                <div class="prompt-emi">
+                    Enter Loan Amount: <input type="text" name="" id="loan-amount">
+                </div>
+                <div class="prompt-emi">
+                    Enter Monthly Interest Rate: <input type="text" name="" id="monthly-rate">
+                </div>
+                <div class="prompt-emi">
+                    Enter Number of payments: <input type="text" name="" id="number-payment">
+                </div>
+                <input type="button" value="Calculate!" onclick="emiCalculator()">
+            </div>
+            <div class="result-emi" style="margin-bottom: 3rem;">
+                <h2 class="result-header">Monthly Payment:</h2><i>Waiting for user input...</i>
+                <h2 class="result-header">Total Interest Paid:</h2><i>Waiting for user input...</i>
+                <h2 class="result-header">Loan Amount:</h2><i>Waiting for user input...</i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function emiCalculator() {
+            let loanAmount = Number(document.getElementById("loan-amount").value)
+            let monthlyRate = Number(document.getElementById("monthly-rate").value)
+            let numberOfPayment = Number(document.getElementById("number-payment").value)
+            let emiResult = loanAmount * ((monthlyRate * (1 + monthlyRate) ** numberOfPayment) / ((1 + monthlyRate) ** numberOfPayment - 1))
+            let totalAmountPaid =  emiResult * numberOfPayment - loanAmount 
+
+
+            document.getElementsByTagName('i')[0].innerText = `$ ` + emiResult.toFixed(2)
+            document.getElementsByTagName('i')[1].innerText = `$ ` + totalAmountPaid.toFixed(2)
+            document.getElementsByTagName('i')[2].innerText = `$ ` + loanAmount
+
+            // for result emphasis purposes 
+
+            for (let i = 0; i <= document.getElementsByTagName('i').length; i++) { 
+                document.getElementsByTagName('i')[i].style.color = "#0d6efd" 
+            }
+        }
+    </script>
+</body>
+
+</html>
